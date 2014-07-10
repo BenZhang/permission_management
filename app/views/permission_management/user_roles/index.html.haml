@@ -1,0 +1,14 @@
+%table.table
+  %tr
+    %th ID
+    %th User
+    %th Email
+    %th Permission
+    %th= link_to 'Roles', permission_management_engine.permission_management_pm_roles_path
+  - @targets.each do |target|
+    %tr
+      %td= target.id
+      %td= target
+      %td= target.email
+      %td{:id => "user-role-td-#{target.id}"}= target.pm_role_name
+      %td.actions= select_tag "pm_user_#{target.id}", options_from_collection_for_select(PM::Role.all, 'id', 'name', target.pm_role_id), :class => 'user-role-select-tag', :data => {:id => target.id}

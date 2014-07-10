@@ -1,0 +1,21 @@
+%table.table
+  %tr
+    %th Role
+    %th Role Type
+    %th
+  - @roles.each do |role|
+    %tr
+      %td= link_to role.name, permission_management_engine.edit_permission_management_pm_role_path(role), class: 'media'
+      %td= role.role_type
+      %td.actions
+        .btn-group
+          - if role.role_type != 'super_admin'
+            = link_to 'Edit', permission_management_engine.edit_permission_management_pm_role_path(role), class: 'btn btn-default'
+            %button.btn.btn-default.dropdown-toggle{"data-toggle" => "dropdown", type: "button"}
+              = fa_icon 'caret-down'
+              %span.sr-only Toggle Dropdown
+            %ul.dropdown-menu.pull-right
+              %li= link_to 'Delete', permission_management_engine.permission_management_pm_role_path(role), :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+= link_to 'New role', permission_management_engine.new_permission_management_pm_role_path, class: 'btn btn-default'
+= link_to 'Back', permission_management_engine.permission_management_user_roles_path, class: 'btn btn-default'

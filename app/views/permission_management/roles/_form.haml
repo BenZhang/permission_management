@@ -1,0 +1,17 @@
+= simple_nested_form_for [permission_management_engine, :permission_management, @role], :html => { :autocomplete => 'off' }, :defaults => { :input_html => { class: "form-control" }} do |f|
+  - if @role.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@role.errors.count, "error")} prohibited this role from being saved:"
+      %ul
+        - @role.errors.full_messages.each do |msg|
+          %li= msg
+  = f.input :name
+  = f.input :role_type, collection: PermissionManagement.role_types, prompt: false
+  #permission-fields
+    = f.simple_fields_for :permissions do |p|
+      .row
+        .col-sm-4= p.input :model_name, label: false
+        .col-sm-4= p.input :action, collection: PermissionManagement.action_types, label: false, prompt: false
+  .form-actions
+    = link_to 'Cancel', permission_management_engine.permission_management_pm_roles_path, class: 'btn btn-link pull-left'
+    = f.submit 'Submit', class: 'btn btn-primary', data: { disable_with: 'Please wait ...' }
