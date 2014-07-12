@@ -1,6 +1,6 @@
 # PermissionManagement
 
-Permission Management is a Rails engine in order to simpliy permission mangement process. 
+Permission Management is a Rails engine in order to simpliy permission mangement process. It is built on top of cancan gem.
 
 ## Installation
 
@@ -12,13 +12,17 @@ And then execute:
 
     $ bundle
 
-Or install it yourself as:
+Then run
 
-    $ gem install permission_management
+    $ bundle exec rails g permission_management:install
+
+To install the relative files.
 
 ## Usage
 
-TODO: Write usage instructions here
+Add the permission management link to your application. You can use this url helper.
+
+    $ permission_management_engine.permission_management_user_roles_path
 
 ## Contributing
 
