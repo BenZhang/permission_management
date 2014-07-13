@@ -11,21 +11,21 @@ module PermissionManagement
         migration_template 'active_record/role_migration.rb', 'db/migrate/pm_create_roles'
         copy_file 'active_record/permission.rb', 'app/models/pm/permission.rb'
         copy_file 'active_record/role.rb', 'app/models/pm/role.rb'
-        route "mount PermissionManagement::Engine => '/'"
         if File.exists? File.join(destination_root, 'app', 'models', 'ability.rb')
-          insert_into_file 'app/models/ability.rb', ability_content, :after => 'user ||= User.new'
+          insert_into_file 'app/models/ability.rb', ability_content, :after => 'user ||= User.new', :force => false
         else
           copy_file 'ability.rb', 'app/models/ability.rb'
         end
+        inject_into_file 'config/routes.rb', "\n  mount PermissionManagement::Engine => '/'", { :after => /\.routes\.draw do\s*$/, :force => false }
         if PermissionManagement.user_model != 'User'
+          insert_into_file 'app/controllers/application_controller.rb', "\n  load_and_authorize_resource\n", :after => 'protect_from_forgery', :force => false
           current_ability = 
 <<RUBY
-
   def current_ability
     @current_ability ||= Ability.new(current_#{PermissionManagement.user_model.underscore})
   end
 RUBY
-          insert_into_file 'app/controllers/application_controller.rb', current_ability, :after => 'protect_from_forgery'
+          insert_into_file 'app/controllers/application_controller.rb', current_ability, :after => 'load_and_authorize_resource', :force => false          
         end
       end
 

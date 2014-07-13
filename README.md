@@ -22,7 +22,8 @@ To install the relative files.
 
 Add the permission management link to your application. You can use this url helper.
 
-    $ permission_management_engine.permission_management_user_roles_path
+    permission_management_engine.permission_management_user_roles_path
+
 
 ## Contributing
 
