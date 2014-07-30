@@ -9,7 +9,7 @@ class PermissionManagement::BaseController < ApplicationController
   private
 
   def check_permission
-    raise CanCan::AccessDenied unless pm_current_user.pm_role_role_type == :admin
+    raise CanCan::AccessDenied unless pm_current_user.pm_role_role_type == 'super_admin'
   end
 
 end
