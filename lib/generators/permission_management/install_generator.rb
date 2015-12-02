@@ -8,7 +8,7 @@ module PermissionManagement
       source_root File.expand_path("../templates", __FILE__)
 
       def copy_permission_management_migration
-        migration_template 'active_record/role_migration.rb', 'db/migrate/pm_create_roles'
+        migration_template 'active_record/role_migration.rb', 'db/migrate/pm_create_roles.rb'
         copy_file 'active_record/permission.rb', 'app/models/pm/permission.rb'
         copy_file 'active_record/role.rb', 'app/models/pm/role.rb'
         if File.exists? File.join(destination_root, 'app', 'models', 'ability.rb')
