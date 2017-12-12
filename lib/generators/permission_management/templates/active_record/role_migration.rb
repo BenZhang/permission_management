@@ -14,7 +14,7 @@ class PmCreateRoles < ActiveRecord::Migration
     create_table :pm_permissions do |t|
       t.integer :pm_role_id
       t.string  :action
-      t.string  :model_name
+      t.string  :target_model
       t.timestamps
     end
     add_index :pm_permissions, :pm_role_id

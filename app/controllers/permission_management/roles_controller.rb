@@ -6,7 +6,7 @@ class PermissionManagement::RolesController < PermissionManagement::BaseControll
 
   def new
     @role = PM::Role.new
-    PermissionManagement.permission_models.each{|model| @role.permissions.build :model_name => model.to_s, :action => :no_access }    
+    PermissionManagement.permission_models.each{|model| @role.permissions.build :target_model => model.to_s, :action => :no_access }    
   end
 
   def create

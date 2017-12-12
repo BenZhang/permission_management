@@ -46,7 +46,7 @@ RUBY
     when 'custom'
       user.pm_role.permissions.each do |permission|
         unless permission.action == 'no_access'
-          can permission.action.to_sym, permission.model_name.constantize
+          can permission.action.to_sym, permission.target_model.constantize
         end
       end
     end

@@ -10,7 +10,7 @@
   #permission-fields
     = f.simple_fields_for :permissions do |p|
       .row
-        .col-sm-4= p.input :model_name, label: false
+        .col-sm-4= p.input :target_model, label: false
         .col-sm-4= p.input :action, collection: PermissionManagement.action_types, label: false, prompt: false
   .form-actions
     = link_to 'Cancel', permission_management_engine.permission_management_pm_roles_path, class: 'btn btn-link pull-left'

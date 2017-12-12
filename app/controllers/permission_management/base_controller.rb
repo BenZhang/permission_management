@@ -1,6 +1,6 @@
 class PermissionManagement::BaseController < ApplicationController
-  send(:before_filter, "authenticate_#{PermissionManagement.user_method}!")
-  before_filter :check_permission
+  # send(:before_filter, "authenticate_#{PermissionManagement.user_method}!")
+  # before_filter :check_permission
 
   def pm_current_user
     instance_eval &PermissionManagement.current_user_method
